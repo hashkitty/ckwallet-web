@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/hashkitty/ckwallet-web#readme",
   "dependencies": {
-    "ckwallet-core": "^0.3.0",
+    "ckwallet-core": "^0.3.10",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
