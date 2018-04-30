@@ -5,7 +5,6 @@ const debug = require('debug')('app');
 
 const router = express.Router();
 const logger = new core.Logger(config.logger);
-const database = new core.Database(config.database);
 const ethereum = new core.CryptoKittiesClient(config.ethereum);
 
 function getFirstIdClause(firstIdParam, sort) {
@@ -42,6 +41,7 @@ function getKittyPrice(kitty, currentBlock) {
 }
 
 async function getKitties(search, sort, firstId = null) {
+  const database = new core.Database(config.database);
   let res = null;
   try {
     if (sort && !/^[a-zA-Z0-9\s]+$/.test(sort)) {
@@ -82,6 +82,7 @@ router.get('/', (req, res) => {
 });
 
 async function getSuggestions() {
+  const database = new core.Database(config.database);
   let res = null;
   try {
     await database.open(false, true);
