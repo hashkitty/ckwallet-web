@@ -103,4 +103,26 @@ router.get('/suggestions', (req, res) => {
   })());
 });
 
+async function getTraits() {
+  const database = new core.Database(config.database);
+  let res = null;
+  try {
+    await database.open(false, true);
+    res = database.getTraits();
+  } catch (err) {
+    logger.error(`getTraits error: ${err}`);
+    debug(`getTraits error: ${err}`);
+  } finally {
+    database.close();
+  }
+  return res;
+}
+
+router.get('/traits', (req, res) => {
+  ((async function asyncGet() {
+    const traits = await getTraits();
+    res.json(traits);
+  })());
+});
+
 module.exports = router;
